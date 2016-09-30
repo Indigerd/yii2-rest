@@ -1,0 +1,23 @@
+{
+  "name": "indigerd/yii2-rest",
+  "description": "Package based on yii2 rest with some improvements",
+  "keywords": ["rest", "yii2", "CORS"],
+  "type": "package",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alexander Stepanenko",
+      "email": "alex.stepanenko@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "indigerd\\rest\\": "src/rest"
+    }
+  },
+  "require": {
+    "php": ">=5.5.0",
+    "yiisoft/yii2": "*",
+    "indigerd/yii2-oauth2-auth-filter" : "*"
+  }
+}
