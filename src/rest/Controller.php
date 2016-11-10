@@ -83,6 +83,9 @@ class Controller extends ActiveController
      */
     protected function actionException(\Exception $e)
     {
+        if (Yii::$app->response->format == Response::FORMAT_HTML) {
+            $this->negotiate();
+        }
         defined('YII_DEBUG') or define('YII_DEBUG', false);
         $name    = $e instanceof \yii\web\HttpException ? $e->getName() : Response::$httpStatuses[500];
         $status  = $e instanceof \yii\web\HttpException ? $e->statusCode : 500;
