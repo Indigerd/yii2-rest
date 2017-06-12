@@ -53,6 +53,9 @@ class QueryHelper
         } else {
             $sorts = explode(',', $sort);
             foreach ($sorts as $sort) {
+                if (!preg_match('^[a-zA-Z0-9\._\s]+$', $sort)) {
+                    continue;
+                }
                 if (!strpos($sort,'.')) {
                     preg_match('/\w+\s+(DESC|ASC)/', $sort, $sortField);
                     $type  = !empty($sortField) ? trim($sortField[1]) : 'DESC';
