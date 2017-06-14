@@ -53,7 +53,7 @@ class QueryHelper
         } else {
             $sorts = explode(',', $sort);
             foreach ($sorts as $sort) {
-                if (!preg_match('^[a-zA-Z0-9\._\s]+$', $sort)) {
+                if (!preg_match('/^[a-zA-Z0-9\._\s]+$/', $sort)) {
                     continue;
                 }
                 if (!strpos($sort,'.')) {
