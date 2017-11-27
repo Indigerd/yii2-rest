@@ -1,6 +1,6 @@
 <?php
 
-namespace api\modules\api\v1\rest;
+namespace indigerd\rest;
 
 use Yii;
 use yii\rest\UrlRule as BaseUrlRule;
