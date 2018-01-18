@@ -39,7 +39,7 @@ class PropertiesAction extends Action
             'string',
             'url'
         ];
-        foreach ($model->rules as $rule) {
+        foreach ($model->rules() as $rule) {
             $fields = $rule[0];
             if (!is_array($fields)) {
                 $fields = [$fields];
@@ -54,7 +54,7 @@ class PropertiesAction extends Action
     protected function getFieldRequired($model, $field)
     {
         $required = false;
-        foreach ($model->rules as $rule) {
+        foreach ($model->rules() as $rule) {
             $fields = $rule[0];
             if (!is_array($fields)) {
                 $fields = [$fields];

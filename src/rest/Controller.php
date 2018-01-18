@@ -23,7 +23,7 @@ class Controller extends ActiveController
                 'class' => Cors::className(),
                 'cors'  => [
                     'Origin' => ['*'],
-                    'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'HEAD', 'OPTIONS'],
+                    'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'HEAD', 'OPTIONS', 'PROPFIND'],
                     'Access-Control-Request-Headers' => ['*'],
                     'Access-Control-Allow-Credentials' => null,
                     'Access-Control-Max-Age' => 86400,
@@ -49,10 +49,21 @@ class Controller extends ActiveController
             'access' => [
                 'class' => AuthFilter::className(),
                 'except' => [
-                    'options'
+                    'options',
+                    'properties'
                 ]
             ]
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function verbs()
+    {
+        $verbs = parent::verbs();
+        $verbs['properties'] = ['PROPFIND'];
+        return $verbs;
     }
 
     /**
