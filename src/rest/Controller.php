@@ -11,6 +11,8 @@ use indigerd\oauth2\authfilter\filter\AuthFilter;
 
 class Controller extends ActiveController
 {
+    public $propertiesModelClass = 'indigerd\rest\Property';
+
     /**
      * @inheritdoc
      */
@@ -51,6 +53,23 @@ class Controller extends ActiveController
                 ]
             ]
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function actions()
+    {
+        return array_merge(
+            parent::actions(),
+            [
+                'properties' => [
+                    'class' => 'indigerd\rest\PropertiesAction',
+                    'modelClass' => $this->modelClass,
+                    'propertiesModelClass' => $this->propertiesModelClass,
+                ],
+            ]
+        );
     }
 
     /**

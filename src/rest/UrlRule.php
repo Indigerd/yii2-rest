@@ -12,6 +12,17 @@ class UrlRule extends BaseUrlRule
 
     protected $verbs = 'GET|HEAD|POST|PUT|PATCH|DELETE|OPTIONS|LINK|UNLINK|LOCK|UNLOCK|PURGE|COPY|MOVE|PROPFIND|VIEW';
 
+    public $patterns = [
+        'PUT,PATCH {id}' => 'update',
+        'DELETE {id}' => 'delete',
+        'GET,HEAD {id}' => 'view',
+        'POST' => 'create',
+        'GET,HEAD' => 'index',
+        'PROPFIND' => 'properties',
+        '{id}' => 'options',
+        '' => 'options',
+    ];
+
     /**
      * Creates a URL rule using the given pattern and action.
      *
