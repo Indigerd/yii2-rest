@@ -6,6 +6,7 @@ use yii\filters\Cors;
 use yii\filters\ContentNegotiator;
 use yii\filters\VerbFilter;
 use yii\rest\ActiveController;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use indigerd\oauth2\authfilter\filter\AuthFilter;
 
@@ -101,6 +102,8 @@ class Controller extends ActiveController
                 $exception = new $eClass($e->getMessage(), $e->statusCode);
             }
             return $this->actionException($exception);
+        } catch (\yii\base\InvalidRouteException $e) {
+            throw new NotFoundHttpException('Invalid route');
         } catch (\Exception $e) {
             return $this->actionException($e);
         }
