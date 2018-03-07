@@ -103,7 +103,7 @@ class Controller extends ActiveController
             }
             return $this->actionException($exception);
         } catch (\yii\base\InvalidRouteException $e) {
-            throw new NotFoundHttpException('Invalid route');
+            return $this->actionException(new NotFoundHttpException('Invalid route'));
         } catch (\Exception $e) {
             return $this->actionException($e);
         }
