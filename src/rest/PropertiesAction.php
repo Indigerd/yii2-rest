@@ -12,11 +12,8 @@ class PropertiesAction extends Action
     {
         $properties = [];
         $model = new $this->modelClass;
-        foreach ($model->fields() as $field => $definition) {
-            if (is_int($field)) {
-                $field = $definition;
-            }
-            $property = new Property();
+        foreach ($model->attributes() as $field) {
+            $property = new $this->propertiesModelClass;
             $property->name = $field;
             $property->type = $this->getFieldType($model, $field);
             $property->required = $this->getFieldRequired($model, $field);
