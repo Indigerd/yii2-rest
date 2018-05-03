@@ -6,11 +6,14 @@ use yii\filters\Cors;
 use yii\filters\ContentNegotiator;
 use yii\filters\VerbFilter;
 use yii\rest\ActiveController;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use indigerd\oauth2\authfilter\filter\AuthFilter;
 
 class Controller extends ActiveController
 {
+    public $propertiesModelClass = 'indigerd\rest\Property';
+
     /**
      * @inheritdoc
      */
@@ -21,7 +24,7 @@ class Controller extends ActiveController
                 'class' => Cors::className(),
                 'cors'  => [
                     'Origin' => ['*'],
-                    'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'HEAD', 'OPTIONS', 'LINK', 'UNLINK'],
+                    'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'HEAD', 'OPTIONS', 'PROPFIND'],
                     'Access-Control-Request-Headers' => ['*'],
                     'Access-Control-Allow-Credentials' => null,
                     'Access-Control-Max-Age' => 86400,
@@ -47,10 +50,38 @@ class Controller extends ActiveController
             'access' => [
                 'class' => AuthFilter::className(),
                 'except' => [
-                    'options'
+                    'options',
+                    'properties'
                 ]
             ]
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function verbs()
+    {
+        $verbs = parent::verbs();
+        $verbs['properties'] = ['PROPFIND'];
+        return $verbs;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function actions()
+    {
+        return array_merge(
+            parent::actions(),
+            [
+                'properties' => [
+                    'class' => 'indigerd\rest\PropertiesAction',
+                    'modelClass' => $this->modelClass,
+                    'propertiesModelClass' => $this->propertiesModelClass,
+                ],
+            ]
+        );
     }
 
     /**
@@ -71,6 +102,8 @@ class Controller extends ActiveController
                 $exception = new $eClass($e->getMessage(), $e->statusCode);
             }
             return $this->actionException($exception);
+        } catch (\yii\base\InvalidRouteException $e) {
+            return $this->actionException(new NotFoundHttpException('Invalid route'));
         } catch (\Exception $e) {
             return $this->actionException($e);
         }
