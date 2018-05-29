@@ -64,6 +64,7 @@ class Controller extends ActiveController
     {
         $verbs = parent::verbs();
         $verbs['properties'] = ['PROPFIND'];
+        $verbs['report'] = ['REPORT'];
         return $verbs;
     }
 
@@ -79,6 +80,10 @@ class Controller extends ActiveController
                     'class' => 'indigerd\rest\PropertiesAction',
                     'modelClass' => $this->modelClass,
                     'propertiesModelClass' => $this->propertiesModelClass,
+                ],
+                'report' => [
+                    'class' => 'indigerd\rest\ReportAction',
+                    'modelClass' => $this->modelClass,
                 ],
             ]
         );

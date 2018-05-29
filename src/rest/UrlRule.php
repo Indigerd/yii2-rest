@@ -19,6 +19,8 @@ class UrlRule extends BaseUrlRule
         'POST' => 'create',
         'GET,HEAD' => 'index',
         'PROPFIND' => 'properties',
+        'REPORT {id}/{reportName}' => 'report',
+        'SEARCH' => 'search',
         '{id}' => 'options',
         '' => 'options',
     ];
