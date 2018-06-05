@@ -10,17 +10,15 @@ use yii\web\UrlRule as WebUrlRule;
 class UrlRule extends BaseUrlRule
 {
 
-    protected $verbs = 'GET|HEAD|POST|PUT|PATCH|DELETE|OPTIONS|LINK|UNLINK|LOCK|UNLOCK|PURGE|COPY|MOVE|PROPFIND|VIEW|SEARCH|REPORT';
+    protected $verbs = 'GET|HEAD|POST|PUT|PATCH|DELETE|OPTIONS|LINK|UNLINK|LOCK|UNLOCK|PURGE|COPY|MOVE|PROPFIND|VIEW|SEARCH';
 
     public $patterns = [
         'PUT,PATCH {id}' => 'update',
         'DELETE {id}' => 'delete',
         'GET,HEAD {id}' => 'view',
         'POST' => 'create',
-        'GET,HEAD' => 'index',
+        'GET,HEAD,SEARCH' => 'index',
         'PROPFIND' => 'properties',
-        'REPORT {id}/{reportName}' => 'report',
-        'SEARCH' => 'search',
         '{id}' => 'options',
         '' => 'options',
     ];
