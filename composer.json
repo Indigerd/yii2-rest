@@ -1,5 +1,5 @@
 {
-  "name": "mice-tm/yii2-rest",
+  "name": "indigerd/yii2-rest",
   "description": "Package based on yii2 rest with some improvements",
   "keywords": ["rest", "yii2", "CORS"],
   "type": "package",
@@ -13,7 +13,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "micetm\\rest\\": "src/rest"
+      "indigerd\\rest\\": "src/rest"
     }
   },
   "require": {
