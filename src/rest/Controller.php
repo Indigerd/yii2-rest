@@ -64,7 +64,7 @@ class Controller extends ActiveController
     {
         $verbs = parent::verbs();
         $verbs['properties'] = ['PROPFIND'];
-        $verbs['index'][] = 'SEARCH';
+        $verbs['search'] = ['SEARCH'];
         return $verbs;
     }
 
