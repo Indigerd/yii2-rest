@@ -15,6 +15,11 @@ class Controller extends ActiveController
     public $propertiesModelClass = 'indigerd\rest\Property';
 
     /**
+     * @var string
+     */
+    public $modelSearchClass;
+
+    /**
      * @inheritdoc
      */
     public function behaviors()
@@ -80,6 +85,10 @@ class Controller extends ActiveController
                     'class' => 'indigerd\rest\PropertiesAction',
                     'modelClass' => $this->modelClass,
                     'propertiesModelClass' => $this->propertiesModelClass,
+                ],
+                'search' => [
+                    'class' => 'indigerd\rest\SearchAction',
+                    'modelSearchClass' => $this->modelSearchClass,
                 ],
             ]
         );
