@@ -15,6 +15,11 @@ class Controller extends ActiveController
     public $propertiesModelClass = 'indigerd\rest\Property';
 
     /**
+     * @var string
+     */
+    public $modelSearchClass;
+
+    /**
      * @inheritdoc
      */
     public function behaviors()
@@ -24,7 +29,7 @@ class Controller extends ActiveController
                 'class' => Cors::className(),
                 'cors'  => [
                     'Origin' => ['*'],
-                    'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'HEAD', 'OPTIONS', 'PROPFIND'],
+                    'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'HEAD', 'OPTIONS', 'PROPFIND', 'SEARCH'],
                     'Access-Control-Request-Headers' => ['*'],
                     'Access-Control-Allow-Credentials' => null,
                     'Access-Control-Max-Age' => 86400,
@@ -64,6 +69,7 @@ class Controller extends ActiveController
     {
         $verbs = parent::verbs();
         $verbs['properties'] = ['PROPFIND'];
+        $verbs['search'] = ['SEARCH'];
         return $verbs;
     }
 
@@ -79,6 +85,10 @@ class Controller extends ActiveController
                     'class' => 'indigerd\rest\PropertiesAction',
                     'modelClass' => $this->modelClass,
                     'propertiesModelClass' => $this->propertiesModelClass,
+                ],
+                'search' => [
+                    'class' => 'indigerd\rest\SearchAction',
+                    'modelSearchClass' => $this->modelSearchClass,
                 ],
             ]
         );

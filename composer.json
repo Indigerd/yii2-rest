@@ -4,6 +4,7 @@
   "keywords": ["rest", "yii2", "CORS"],
   "type": "package",
   "license": "MIT",
+  "minimum-stability": "dev",
   "authors": [
     {
       "name": "Alexander Stepanenko",
