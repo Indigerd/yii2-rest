@@ -148,8 +148,8 @@ class Controller extends ActiveController
             $this->negotiate();
         }
         defined('YII_DEBUG') or define('YII_DEBUG', false);
-        $name    = $e instanceof \yii\web\HttpException ? $e->getName() : Response::$httpStatuses[500];
-        $status  = $e instanceof \yii\web\HttpException ? $e->statusCode : 500;
+        $name    = $e instanceof \yii\web\HttpException ? $e->getName() : Response::$httpStatuses[$e->getCode()];
+        $status  = $e instanceof \yii\web\HttpException ? $e->statusCode : $e->getCode();
         $message = $e instanceof \yii\web\HttpException ? $e->getMessage() : (YII_DEBUG ? $e->getMessage() : '');
         Yii::$app->response->setStatusCode($status);
         $result = [
