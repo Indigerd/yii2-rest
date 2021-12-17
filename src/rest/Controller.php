@@ -46,7 +46,8 @@ class Controller extends ActiveController
                         'PURGE',
                         'COPY',
                         'MOVE',
-                        'VIEW'
+                        'VIEW',
+                        'REPORT',
                     ],
                     'Access-Control-Request-Headers' => ['*'],
                     'Access-Control-Allow-Credentials' => null,
